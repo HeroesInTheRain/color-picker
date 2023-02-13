@@ -1,16 +1,14 @@
 <template>
   <div id="app" :style="backgroundStyle">
     <div class="flex">
-      <background-picker @change="changeBackgroundColor" :label="colorLabel" :options="colorOptions" :pickerType="colorPickerType" :clearSelection="currentSelectionType != 'color'"/>
-      <background-picker @change="changeBackgroundImage" :label="imageLabel" :options="imageOptions" :pickerType="imagePickerType" :clearSelection="currentSelectionType != 'image'"/>
+      <background-picker @change="changeBackgroundColor" :label="colorLabel" :options="colorOptions" :pickerType="colorPickerType" :clearSelection="currentSelectionType != 'color'" size="sm"/>
+      <background-picker @change="changeBackgroundImage" :label="imageLabel" :options="imageOptions" :pickerType="imagePickerType" :clearSelection="currentSelectionType != 'image'" size="md"/>
+      <background-picker @change="changeBackgroundColor" :label="colorLabel" :options="colorOptions" :pickerType="colorPickerType" :clearSelection="currentSelectionType != 'color'" size="lg"/>
     </div>
     <div class="flex">
-      <background-picker @change="changeBackgroundColor" :label="colorLabel" :options="colorOptions" :pickerType="colorPickerType" :clearSelection="currentSelectionType != 'color'"/>
-      <background-picker @change="changeBackgroundImage" :label="imageLabel" :options="imageOptions" :pickerType="imagePickerType" :clearSelection="currentSelectionType != 'image'"/>
-    </div>
-    <div class="">
-      <background-picker @change="changeBackgroundColor" :label="colorLabel" :options="colorOptions" :pickerType="colorPickerType" :clearSelection="currentSelectionType != 'color'"/>
-      <background-picker @change="changeBackgroundImage" :label="imageLabel" :options="imageOptions" :pickerType="imagePickerType" :clearSelection="currentSelectionType != 'image'"/>
+      <background-picker @change="changeBackgroundImage" :label="imageLabel" :options="imageOptions" :pickerType="imagePickerType" :clearSelection="currentSelectionType != 'image'" size="xl"/>
+      <background-picker @change="changeBackgroundColor" :label="colorLabel" :options="colorOptions" :pickerType="colorPickerType" :clearSelection="currentSelectionType != 'color'" size="asd"/>
+      <background-picker @change="changeBackgroundImage" :label="imageLabel" :options="imageOptions" :pickerType="imagePickerType" :clearSelection="currentSelectionType != 'image'" size="sm"/>
     </div>
   </div>
 </template>

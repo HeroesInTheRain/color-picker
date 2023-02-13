@@ -2,7 +2,7 @@
 	<div class="background-picker__main">
 		<div class="btn-group dropright background-picker__picker">
 			<button 
-				class="btn btn-circle dropdown-toggle background-picker__picker-button" 
+				:class="'btn btn-circle dropdown-toggle background-picker__picker-button--' + componentSize"
 				data-toggle="dropdown" 
 				aria-haspopup="true" 
 				aria-expanded="false"
@@ -41,7 +41,7 @@
 					<button 
 						v-for="item in column"
 						href="#" @click="setItem(item)"
-						class="btn btn-circle dropdown-item background-picker__picker-button-palette" 
+						class="btn btn-circle dropdown-item background-picker__picker-button-palette"
 					>
 						<svg v-if="!item" class="background-picker__picker-button-image" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" transform="rotate(270)">
 							<path fill-rule="evenodd" clip-rule="evenodd" 
@@ -76,10 +76,6 @@ export default {
 			type: String,
 			default: "color"
 		},
-		paletteColumns: {
-			type: Number,
-			default: 3
-		},
 		borderColor: {
 			type: String,
 			default: '#DE1B72'
@@ -97,7 +93,8 @@ export default {
 		return {
 			selectedItem: "",
 			itemsList: [],
-			paletteItemsList: []
+			paletteItemsList: [],
+			sizes: ["sm", "md", "lg"]
 		}
 	},
 	computed: {
@@ -121,6 +118,8 @@ export default {
 		//Add an empty item to be able to clear the selection inside the palette
 		this.itemsList = [...this.options, ""];
 		this.setPaletteItemsList();
+		this.componentSize = this.sizes.indexOf(this.size) == -1 ? "md" : this.size;
+
 	},
 	methods: {
 		setItem: function(item) {
@@ -134,7 +133,8 @@ export default {
 			var j=0;
 			while(j < this.itemsList.length){
 				var columnItems = []
-				for(let i=0; i < this.paletteColumns; i++){
+				//3 Columns
+				for(let i=0; i < 3; i++){
 					if(!this.paletteItemsList[i]) this.paletteItemsList[i] = [];
 					if(j < this.itemsList.length) this.paletteItemsList[i].push(this.itemsList[j]);
 					j++;
@@ -164,12 +164,28 @@ export default {
 		text-align: center;
 	}
 
-	.background-picker__picker-button {
+	.background-picker__picker-button--sm {
 		overflow: hidden;
+		background-color: #fff;
+		border-radius: 30px;
+		width: 32px;
+		height: 32px;
+	}
+
+	.background-picker__picker-button--md {
+		overflow: hidden;
+		background-color: #fff;
 		border-radius: 30px;
 		width: 50px;
-    	height: 50px;
+		height: 50px;
+	}
+
+	.background-picker__picker-button--lg {
+		overflow: hidden;
 		background-color: #fff;
+		border-radius: 30px;
+		width: 64px;
+		height: 64px;
 	}
 
 	.background-picker__picker-button-image {
@@ -178,17 +194,17 @@ export default {
 		top: 0;
 		left: 0;
 	}
-
+	
 	.background-picker__picker-button-palette {
 		display: inline-block;
 		overflow: hidden;
-		width: 20px;
-    	height: 20px;
 		padding: 10px;
 		margin: 10px;
+		margin-left: 0;
+		width: 20px;
+		height: 20px;
 		border-radius: 10px;
 		box-shadow: 0 0 0 0.2rem rgb(240 240 240);
-		margin-left: 0;
 	}
 
 	.background-picker__label {
@@ -207,7 +223,7 @@ export default {
 	.dropdown-menu.show {
 		display: flex;
 		flex-wrap: wrap;
-		width: 3rem;
+		max-width: 1rem;
 		padding: 5px 0 5px 10px ;
 		text-align: center;
 	}
